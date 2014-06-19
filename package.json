@@ -1,0 +1,16 @@
+{
+    "name": "Esenin",
+    "version": "0.0.1",
+    "private": "true",
+    "dependencies": {
+        "uglify-js": "*",
+        "coffee-script": "*",
+        "connect-coffee-script": "*",
+        "express": "*",
+        "body-parser": "*",
+        "method-override" : "*",
+        "morgan": "*",
+        "jade": "*",
+        "stylus": "*"
+    }
+}

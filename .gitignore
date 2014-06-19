@@ -1,0 +1,5 @@
+*.swp
+node_modules/
+static/scripts/esenin.js
+static/scripts/songs.js
+static/stylesheets/esenin.css

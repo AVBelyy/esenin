@@ -1,0 +1,46 @@
+doctype html
+html(lang="ru")
+    head
+        meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Сергей Александрович Есенин
+        link(rel="stylesheet", href="/static/stylesheets/bootstrap.min.css")
+        link(rel="stylesheet", href="/static/stylesheets/bootstrap-responsive.min.css")
+        link(rel="stylesheet", href="/static/stylesheets/esenin.css")
+        <!--[if lt IE 9]>
+        script(type="text/javascript",   src="/static/scripts/html5.min.js")
+        <![endif]-->
+        script(src="/static/scripts/jquery.min.js")
+        script(src="/static/scripts/bootstrap.min.js")
+        script(src="/static/scripts/buzz.min.js")
+        script(src="/static/scripts/esenin.js")
+        script(src="/static/scripts/songs.js")
+    body
+        center
+            #header.hero-unit
+                img(src="/static/images/portrait.jpg")
+                span#right.pull-right 
+                    h1 Сергей Есенин
+                    blockquote
+                        span “
+                        | Не злодей я и не грабил лесом,<br>
+                        | Не расстреливал несчастных по темницам.<br>
+                        | Я всего лишь уличный повеса,<br>
+                        | Улыбающийся встречным лицам
+                        span ”
+            .container
+                table#songs.table.table-hover.table-striped
+                  - for song in songs
+                        tr
+                            td
+                                .play.button
+                            td
+                                .length #{song.length}
+                                .title  #{song.title}
+                                .artist #{song.artist}
+        #karaoke
+            #lines
+                p.first.line
+                p.first.line
+                p.second.line
+                p.second.line
