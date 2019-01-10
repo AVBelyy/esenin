@@ -116,6 +116,7 @@ $ ->
 
         if not playing
             audio.play()
+            audio.pause()
             ($ "body").animate
                 top: -$(this).offset().top+($ document).scrollTop()
             , 500, ->
@@ -125,6 +126,7 @@ $ ->
                     handlers[0]()
                 , 0
                 playing = true
+                audio.play()
                 $karaoke.toggle()
                 ($song.find ".play")
                     .removeClass("play")
