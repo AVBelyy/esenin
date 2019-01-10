@@ -25,8 +25,11 @@ unroll = ($line, timing, cur, cb) ->
 
     $elem.animate
         width: width
-    , 1000*delay, ->
-        unroll $line, timing, cur+1, cb
+      ,
+        duration: 1000*delay
+        queue: false
+        step: () -> $elem.css "overflow", "visible"
+        complete: () -> unroll $line, timing, cur+1, cb
 
 display = (lines, flag, cb) ->
     lines = lines.filter (x) -> x
@@ -43,6 +46,8 @@ display = (lines, flag, cb) ->
                 cmd = ["", cmd]
             [text, delay] = cmd
             $p = ($ "<p>").addClass("text").html (if text then "&nbsp;#{text}" else "")
+            if !text
+                $p.css "display", "none"
             $p.appendTo $lines[i][0]
             if i == flag
                 timing.push [delay, $p.width()]
@@ -60,7 +65,8 @@ $$ = (song) ->
 
     API =
         header: (info) ->
-            audio = new buzz.sound "/static/audio/#{info.file}", formats: [ "ogg", "mp3" ]
+            audio = new buzz.sound "/static/audio/#{info.file}",
+                formats: [ "aac", "ogg" ]
 
             audio.bind "play", ->
                 position = audio.getDuration() - audio.getTime()
@@ -109,15 +115,15 @@ $ ->
         {audio, handlers} = songs[($ "#songs tr").index $song]
 
         if not playing
+            audio.play()
             ($ "body").animate
-                top: -$(this).offset().top+($ "body").scrollTop()
+                top: -$(this).offset().top+($ document).scrollTop()
             , 500, ->
                 ($ "body").css "overflow", "hidden"
                 $song.addClass("playing")
                 setTimeout ->
                     handlers[0]()
                 , 0
-                audio.play()
                 playing = true
                 $karaoke.toggle()
                 ($song.find ".play")

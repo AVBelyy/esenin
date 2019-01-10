@@ -39,14 +39,14 @@ for file in files
     require("./songs/#{file}")
 
 fs.writeFileSync "#{__dirname}/static/scripts/songs.js",
-                 (uglify.minify js, fromString: true).code
+                 (uglify.minify js).code
 
 # configure express
 
 app = express()
 
 app.set "views", "#{__dirname}/views"
-app.set "view engine", "jade"
+app.set "view engine", "pug"
 
 app.use body_parser.urlencoded extended: true
 app.use body_parser.json()
@@ -57,7 +57,7 @@ app.use connect_coffee
             bare: true
             compile: (str, options) ->
                 js = coffee.compile(str, options)
-                (uglify.minify js, fromString: true).code
+                (uglify.minify js).code
 app.use stylus.middleware
             src:  __dirname
             dest: __dirname
@@ -73,5 +73,6 @@ app.get "/", (req, res) ->
     res.render "index",
         songs: songs
 
-
-app.listen 2109
+port = 2109
+console.log "Listening on port #{port}"
+app.listen port
