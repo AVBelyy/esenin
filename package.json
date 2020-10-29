@@ -3,14 +3,14 @@
     "version": "0.0.1",
     "private": "true",
     "dependencies": {
-        "uglify-js": "==3.4.9",
+        "body-parser": "==1.18.3",
         "coffee-script": "==1.12.7",
         "connect-coffee-script": "==0.2.1",
         "express": "==4.16.4",
-        "body-parser": "==1.18.3",
         "method-override": "==3.0.0",
         "morgan": "==1.9.1",
         "pug": "==2.0.3",
-        "stylus": "==0.54.5"
+        "stylus": "==0.54.5",
+        "uglify-js": "==3.11.4"
     }
 }
