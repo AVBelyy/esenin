@@ -2,7 +2,6 @@ coffee          = require "coffee-script"
 body_parser     = require "body-parser"
 method_override = require "method-override"
 logger          = require "morgan"
-connect_coffee  = require "connect-coffee-script"
 uglify          = require "uglify-js"
 
 fs      = require "fs"
@@ -41,6 +40,10 @@ for file in files
 fs.writeFileSync "#{__dirname}/static/scripts/songs.js",
                  (uglify.minify js).code
 
+esenin_js = coffee.compile (fs.readFileSync "./static/scripts/esenin.coffee", "utf8"), bare: true
+fs.writeFileSync "./static/scripts/esenin.js",
+                 (uglify.minify esenin_js).code
+
 # configure express
 
 app = express()
@@ -52,12 +55,6 @@ app.use body_parser.urlencoded extended: true
 app.use body_parser.json()
 app.use method_override()
 app.use logger "dev"
-app.use connect_coffee
-            src: __dirname
-            bare: true
-            compile: (str, options) ->
-                js = coffee.compile(str, options)
-                (uglify.minify js).code
 app.use stylus.middleware
             src:  __dirname
             dest: __dirname
