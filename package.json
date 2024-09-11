@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": "true",
     "dependencies": {
-        "body-parser": "==1.18.3",
+        "body-parser": "==1.20.3",
         "coffee-script": "==1.12.7",
         "express": "==4.19.2",
         "method-override": "==3.0.0",
